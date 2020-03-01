@@ -27,7 +27,7 @@ class val Power
 
 // TODO: Complain abou the pony compiler until it becomes case sensitive    
 //   new val unit_mW(value':F64) =>
-  new val unit_milliWatt(value':F64) =>
+  new val unit_milli_watt(value':F64) =>
     _value=value'
     _unit = "mW"
   
@@ -168,7 +168,7 @@ class val Power
 
 // TODO: Complain abou the pony compiler until it becomes case sensitive    
 //   fun val to_mW() =>
-  fun val to_milliWatt() =>
+  fun val to_milli_watt() =>
     match _unit
     | "Nm/s" => unit_milliWatt(_value * 1E3)
     | "J/s" => unit_milliWatt(_value * 1E3)

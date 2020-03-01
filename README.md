@@ -38,3 +38,17 @@ actor Main
       env.out.print("Can't parse.")
     end
 ```
+
+Output:
+```
+1000 kWh
+3.6e+09 J
+3.6 GJ
+3.6e+09 Nm
+1e+06 Wh
+1 MWh
+1900 kWh
+100 kWh
+-0.1 MWh
+84420 kJ
+```

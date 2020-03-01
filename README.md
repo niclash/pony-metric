@@ -7,6 +7,14 @@ Library for physical dimensions, i.e. mainly SI units and conversions between th
 This library is not complete and constantly evolving, seeking to add more dimensions,
 more units and more conversions. Please submit Pull Requests.
 
+### Missing low hanging fruit
+* `add()`, `sub()`, `div()` and `mul()` operators for all. See `energy.pony` for example.
+
+* Formulas, such a `F = m * a`, so that conversion can be done easily. See `energy.pony` for example.
+
+* Common Imperial units, such as `mph` and`ft`.
+
+
 ## Example
 ```
 actor Main

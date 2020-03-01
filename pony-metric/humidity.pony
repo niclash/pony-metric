@@ -16,7 +16,7 @@ class val Humidity
   fun val string(): String =>
     _value.string() + " " + _unit
 
-  fun val to_m_s2():Humidity =>
+  fun val to_RH():Humidity =>
     match _unit
     | "RH%" => this
     else this

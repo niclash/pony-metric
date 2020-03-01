@@ -21,7 +21,7 @@ class val Pressure
     _value = value'
     _unit = "Pa"
 
-  new val unit_mPa(value':F64) =>
+  new val unit_milli_Pa(value':F64) =>
     _value = value'
     _unit = "mPa"
 
@@ -51,12 +51,12 @@ class val Pressure
     else this
     end
 
-  fun val to_mPa():Pressure =>
+  fun val to_milli_Pa():Pressure =>
     match _unit
-    | "Pa" => unit_mPa(_value * 1000)
+    | "Pa" => unit_milli_Pa(_value * 1000)
     | "mPa" => this
-    | "kPa" => unit_mPa(_value * 1000000)
-    | "MPa" => unit_mPa(_value * 1000000000)
+    | "kPa" => unit_milli_Pa(_value * 1000000)
+    | "MPa" => unit_milli_Pa(_value * 1000000000)
     else this
     end
 

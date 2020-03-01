@@ -46,7 +46,7 @@ class val Resistance
   fun val string(): String =>
     _value.string() + " " + _unit
 
-  fun val to_milli_ohm():Resistence =>
+  fun val to_milli_ohm():Resistance =>
     match _unit
     | "mΩ" => this
     | "Ω" => unit_milli_ohm(_value * 1000)
@@ -56,7 +56,7 @@ class val Resistance
     else this
     end
 
-  fun val to_ohm():Resistence =>
+  fun val to_ohm():Resistance =>
     match _unit
     | "mΩ" => unit_ohm(_value / 1000)
     | "Ω" => this
@@ -67,7 +67,7 @@ class val Resistance
     end
 
 
-  fun val to_kilo_ohm():Resistence =>
+  fun val to_kilo_ohm():Resistance =>
     match _unit
     | "mΩ" => unit_kilo_ohm(_value / 1000000)
     | "Ω" => unit_kilo_ohm(_value / 1000)
@@ -77,7 +77,7 @@ class val Resistance
     else this
     end
 
-  fun val to_mega_ohm():Resistence =>
+  fun val to_mega_ohm():Resistance =>
     match _unit
     | "mΩ" => unit_mega_ohm(_value / 1000000000)
     | "Ω" => unit_mega_ohm(_value / 1000000)
@@ -87,7 +87,7 @@ class val Resistance
     else this
     end
 
-  fun val to_giga_ohm():Resistence =>
+  fun val to_giga_ohm():Resistance =>
     match _unit
     | "mΩ" => unit_giga_ohm(_value / 1000000000000)
     | "Ω" => unit_giga_ohm(_value / 1000000000)

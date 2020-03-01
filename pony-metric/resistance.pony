@@ -96,3 +96,4 @@ class val Resistance
     | "GΩ" => this
     else this
     end
+    

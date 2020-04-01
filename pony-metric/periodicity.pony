@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Time is Metric
+class val Periodicity is Metric
   let _value:F64
   let _unit:String
   

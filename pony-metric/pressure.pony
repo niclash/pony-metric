@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Pressure
+class val Pressure is Metric
   let _value:F64
   let _unit:String
   
@@ -33,14 +33,24 @@ class val Pressure
     _value = value'
     _unit = "MPa"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "Pa" => None
+    | "mPa" => None
+    | "kPa" => None
+    | "MPa" => None
+    else error
+    end
+    
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_Pa():Pressure =>
     match _unit

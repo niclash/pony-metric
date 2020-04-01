@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Current
+class val Current is Metric
   let _value:F64
   let _unit:String
   
@@ -41,14 +41,26 @@ class val Current
     _value = value'
     _unit = "pA"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "A" => None
+    | "kA" => None
+    | "mA" => None
+    | "µA" => None
+    | "nA²" => None
+    | "pA²" => None
+    else error
+    end
+    
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_A():Current =>
     match _unit

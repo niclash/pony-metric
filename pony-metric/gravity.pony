@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Gravity
+class val Gravity is Metric
   let _value:F64
   let _unit:String
   
@@ -21,14 +21,21 @@ class val Gravity
     _value = value'
     _unit = "m/s²"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "m/s²" => None
+    else error
+    end
+
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_m_s2():Gravity =>
     match _unit

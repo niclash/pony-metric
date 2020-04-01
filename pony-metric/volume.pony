@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Volume
+class val Volume is Metric
   let _value:F64
   let _unit:String
   
@@ -53,14 +53,29 @@ class val Volume
     _value = value'
     _unit = "ml"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "m³" => None
+    | "dm³" => None
+    | "cm³" => None
+    | "mm³" => None
+    | "km³" => None
+    | "l" => None
+    | "l" => None
+    | "cl" => None
+    | "ml" => None
+    else error
+    end
+    
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_m3():Volume =>
     match _unit

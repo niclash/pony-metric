@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Distance
+class val Distance is Metric
   let _value:F64
   let _unit:String
   
@@ -37,14 +37,25 @@ class val Distance
     _value = value'
     _unit = "km"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "m" => None
+    | "dm" => None
+    | "cm" => None
+    | "mm" => None
+    | "km" => None
+    else error
+    end
+    
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_m():Distance =>
     match _unit

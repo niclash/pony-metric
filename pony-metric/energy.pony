@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Energy
+class val Energy is Metric
   let _value:F64
   let _unit:String
   
@@ -65,10 +65,8 @@ class val Energy
     _value=value'
     _unit = "TJ"
     
-  new val parse(t:String)? =>
-    let pos = t.find(" ")?
-    _value = t.substring(0,pos).f64()?
-    _unit = t.substring(pos+1)
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
     match _unit
     | "Nm" => None
     | "Ws" => None
@@ -91,8 +89,8 @@ class val Energy
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_Power(time:Time):Power =>
     Power.unit_W(to_J()._value / time.to_s().value())

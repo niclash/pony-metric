@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Voltage
+class val Voltage is Metric
   let _value:F64
   let _unit:String
   
@@ -41,14 +41,26 @@ class val Voltage
     _value = value'
     _unit = "pV"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "V" => None
+    | "mV" => None
+    | "µV" => None
+    | "nV" => None
+    | "pV" => None
+    | "kV" => None
+    else error
+    end
+    
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_V():Voltage =>
     match _unit

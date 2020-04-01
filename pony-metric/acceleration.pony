@@ -13,13 +13,20 @@
    limitations under the License.
 */
 
-class val Acceleration
+class val Acceleration is Metric
   let _value:F64
   let _unit:String
   
-  new val unit_s(value':F64) =>
+  new val unit_m_s2(value':F64) =>
     _value = value'
     _unit = "m/s²"
+
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "m/s²" => None
+    else error
+    end
 
   fun val value():F64 =>
     _value
@@ -27,8 +34,8 @@ class val Acceleration
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_m_s2():Acceleration =>
     match _unit

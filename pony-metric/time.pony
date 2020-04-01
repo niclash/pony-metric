@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Time
+class val Time is Metric
   let _value:F64
   let _unit:String
   
@@ -29,14 +29,23 @@ class val Time
     _value = value'
     _unit = "h"
     
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "h" => None
+    | "min" => None
+    | "s" => None
+    else error
+    end
+    
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_s():Time =>
     match _unit

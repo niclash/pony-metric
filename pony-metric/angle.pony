@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Angle
+class val Angle is Metric
   let _value:F64
   let _unit:String
   
@@ -25,14 +25,23 @@ class val Angle
     _value = value'
     _unit = "rad"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "°" => None
+    | "rad" => None
+    else error
+    end
+
+
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_degrees():Angle =>
     match _unit

@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Area
+class val Area is Metric
   let _value:F64
   let _unit:String
   
@@ -37,14 +37,25 @@ class val Area
     _value = value'
     _unit = "km²"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "m²" => None
+    | "dm²" => None
+    | "cm²" => None
+    | "mm²" => None
+    | "km²" => None
+    else error
+    end
+    
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_m2():Area =>
     match _unit

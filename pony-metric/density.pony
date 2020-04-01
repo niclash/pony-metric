@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Density
+class val Density is Metric
   let _value:F64
   let _unit:String
   
@@ -29,14 +29,23 @@ class val Density
     _value = value'
     _unit = "g/cm³"
 
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
+    match _unit
+    | "kg/m³" => None
+    | "kg/dm³" => None
+    | "g/cm³" => None
+    else error
+    end
+    
   fun val value():F64 =>
     _value
     
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_kg_m3():Density =>
     match _unit

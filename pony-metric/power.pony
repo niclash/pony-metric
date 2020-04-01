@@ -13,7 +13,7 @@
    limitations under the License.
 */
 
-class val Power
+class val Power is Metric
   let _value:F64
   let _unit:String
 
@@ -87,10 +87,8 @@ class val Power
     _value=value'
     _unit = "Nm/s"
   
-  new val parse(t:String)? =>
-    let pos = t.find(" ")?
-    _value = t.substring(0,pos).f64()?
-    _unit = t.substring(pos+1)
+  new val parse(text:String)? =>
+    (_value, _unit) = MetricParser._extract(text)
     match _unit
     | "Nm/s" => None
     | "J/s" => None
@@ -118,8 +116,8 @@ class val Power
   fun val unit(): String =>
     _unit
     
-  fun val string(): String =>
-    _value.string() + " " + _unit
+  fun box string(): String iso^ =>
+    (_value.string() + " " + _unit).string()
 
   fun val to_nW() =>
     match _unit
@@ -170,23 +168,23 @@ class val Power
 //   fun val to_mW() =>
   fun val to_milli_watt() =>
     match _unit
-    | "Nm/s" => unit_milliWatt(_value * 1E3)
-    | "J/s" => unit_milliWatt(_value * 1E3)
-    | "kJ/s" => unit_milliWatt(_value * 1E6)
-    | "MJ/s" => unit_milliWatt(_value * 1E9)
-    | "GJ/s" => unit_milliWatt(_value * 1E12)
-    | "nW" => unit_milliWatt(_value / 1E6)
-    | "µW" => unit_milliWatt(_value / 1E3)
+    | "Nm/s" => unit_milli_watt(_value * 1E3)
+    | "J/s" => unit_milli_watt(_value * 1E3)
+    | "kJ/s" => unit_milli_watt(_value * 1E6)
+    | "MJ/s" => unit_milli_watt(_value * 1E9)
+    | "GJ/s" => unit_milli_watt(_value * 1E12)
+    | "nW" => unit_milli_watt(_value / 1E6)
+    | "µW" => unit_milli_watt(_value / 1E3)
     | "mW" => this
-    | "W" => unit_milliWatt(_value * 1E3)
-    | "kW" => unit_milliWatt(_value * 1E6)
-    | "MW" => unit_milliWatt(_value * 1E9)
-    | "GW" => unit_milliWatt(_value * 1E12)
-    | "TW" => unit_milliWatt(_value * 1E15)
-    | "kWh/y" => unit_milliWatt(_value / 8.76E-3)
-    | "MWh/y" => unit_milliWatt(_value / 8.76E-6)
-    | "GWh/y" => unit_milliWatt(_value / 8.76E-9)
-    | "TWh/y" => unit_milliWatt(_value / 8.76E-12)
+    | "W" => unit_milli_watt(_value * 1E3)
+    | "kW" => unit_milli_watt(_value * 1E6)
+    | "MW" => unit_milli_watt(_value * 1E9)
+    | "GW" => unit_milli_watt(_value * 1E12)
+    | "TW" => unit_milli_watt(_value * 1E15)
+    | "kWh/y" => unit_milli_watt(_value / 8.76E-3)
+    | "MWh/y" => unit_milli_watt(_value / 8.76E-6)
+    | "GWh/y" => unit_milli_watt(_value / 8.76E-9)
+    | "TWh/y" => unit_milli_watt(_value / 8.76E-12)
     else this
     end
   

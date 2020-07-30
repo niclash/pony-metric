@@ -47,7 +47,7 @@ class val Periodicity is Metric
   fun box string(): String iso^ =>
     (_value.string() + " " + _unit).string()
 
-  fun val to_s():Time =>
+  fun val to_s():Periodicity =>
     match _unit
     | "s" => this
     | "m" => unit_s(_value * 60)
@@ -55,7 +55,7 @@ class val Periodicity is Metric
     else this
     end
 
-  fun val to_m():Time =>
+  fun val to_m():Periodicity =>
     match _unit
     | "s" => unit_m(_value / 60)
     | "m" => this
@@ -63,7 +63,7 @@ class val Periodicity is Metric
     else this
     end
     
-  fun val to_h():Time =>
+  fun val to_h():Periodicity =>
     match _unit
     | "s" => unit_h(_value / 3600)
     | "m" => unit_h(_value / 60)

@@ -81,7 +81,7 @@ primitive MetricParser
         if( not (result is None ) ) then
             return result
         end
-        result = Time.parse(text)?
+        result = Periodicity.parse(text)?
         if( not (result is None ) ) then
             return result
         end

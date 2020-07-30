@@ -92,7 +92,7 @@ class val Energy is Metric
   fun box string(): String iso^ =>
     (_value.string() + " " + _unit).string()
 
-  fun val to_Power(time:Time):Power =>
+  fun val to_Power(time:Periodicity):Power =>
     Power.unit_W(to_J()._value / time.to_s().value())
     
   fun val div(value':F64):Energy =>

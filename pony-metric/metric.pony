@@ -1,6 +1,6 @@
 
 
-trait Metric is Float
+trait Metric is F64
     new val parse(text:String)?
     fun val value():F64
     fun val unit():String

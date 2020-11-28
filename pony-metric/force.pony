@@ -14,23 +14,23 @@
 */
 
 class val Force is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
   
   new val unit_N(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "N"
 
   new val unit_kN(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "kN"
 
   new val unit_MN(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "MN"
 
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "N" => None
     | "kN" => None
@@ -39,34 +39,34 @@ class val Force is Metric
     end
 
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit():String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
   fun val to_N():Force =>
     match _unit
     | "N" => this
-    | "kN" => unit_N(_value * 1000)
-    | "MN" => unit_N(_value * 1000000)
+    | "kN" => unit_N(_val * 1000)
+    | "MN" => unit_N(_val * 1000000)
     else this
     end
 
   fun val to_kN():Force =>
     match _unit
-    | "N" => unit_kN(_value * 1000)
+    | "N" => unit_kN(_val * 1000)
     | "kN" => this
-    | "MN" => unit_kN(_value * 1000)
+    | "MN" => unit_kN(_val * 1000)
     else this
     end
 
   fun val to_MN():Force =>
     match _unit
-    | "N" => unit_MN(_value / 1000000)
-    | "kN" => unit_MN(_value / 1000)
+    | "N" => unit_MN(_val / 1000000)
+    | "kN" => unit_MN(_val / 1000)
     | "MN" => this
     else this
     end

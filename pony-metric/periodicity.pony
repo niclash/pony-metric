@@ -14,23 +14,23 @@
 */
 
 class val Periodicity is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
   
   new val unit_s(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "s"
     
   new val unit_m(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "m"
     
   new val unit_h(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "h"
     
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "h" => None
     | "min" => None
@@ -39,34 +39,34 @@ class val Periodicity is Metric
     end
     
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit(): String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
-  fun val to_s():Time =>
+  fun val to_s():Periodicity =>
     match _unit
     | "s" => this
-    | "m" => unit_s(_value * 60)
-    | "h" => unit_s(_value * 3600)
+    | "m" => unit_s(_val * 60)
+    | "h" => unit_s(_val * 3600)
     else this
     end
 
-  fun val to_m():Time =>
+  fun val to_m():Periodicity =>
     match _unit
-    | "s" => unit_m(_value / 60)
+    | "s" => unit_m(_val / 60)
     | "m" => this
-    | "h" => unit_m(_value * 3600)
+    | "h" => unit_m(_val * 3600)
     else this
     end
     
-  fun val to_h():Time =>
+  fun val to_h():Periodicity =>
     match _unit
-    | "s" => unit_h(_value / 3600)
-    | "m" => unit_h(_value / 60)
+    | "s" => unit_h(_val / 3600)
+    | "m" => unit_h(_val / 60)
     | "h" => this
     else this
     end

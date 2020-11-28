@@ -14,23 +14,23 @@
 */
 
 class val Flow is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
   
   new val unit_m3_h(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "m³/h"
 
   new val unit_m3_s(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "m³/s"
 
   new val unit_l_s(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "l/s"
 
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "m³/h" => None
     | "m³/s" => None
@@ -39,34 +39,34 @@ class val Flow is Metric
     end
 
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit():String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
   fun val to_m3_h():Flow =>
     match _unit
     | "m³/h" => this
-    | "m³/s" => unit_m3_h(_value * 3600)
-    | "l/s" => unit_m3_h(_value * 3.6)
+    | "m³/s" => unit_m3_h(_val * 3600)
+    | "l/s" => unit_m3_h(_val * 3.6)
     else this
     end
 
   fun val to_m3_s():Flow =>
     match _unit
-    | "m³/h" => unit_m3_s(_value * 3600)
+    | "m³/h" => unit_m3_s(_val * 3600)
     | "m³/s" => this
-    | "l/s" => unit_m3_s(_value * 1000)
+    | "l/s" => unit_m3_s(_val * 1000)
     else this
     end
 
   fun val to_l_s():Flow =>
     match _unit
-    | "m³/h" => unit_l_s(_value / 3.6)
-    | "m³/s" => unit_l_s(_value / 1000)
+    | "m³/h" => unit_l_s(_val / 3.6)
+    | "m³/s" => unit_l_s(_val / 1000)
     | "l/s" => this
     else this
     end

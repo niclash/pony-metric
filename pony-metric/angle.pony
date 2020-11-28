@@ -14,19 +14,19 @@
 */
 
 class val Angle is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
   
   new val unit_deg(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "°"
 
   new val unit_rad(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "rad"
 
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "°" => None
     | "rad" => None
@@ -35,24 +35,24 @@ class val Angle is Metric
 
 
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit(): String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
   fun val to_degrees():Angle =>
     match _unit
     | "°" => this
-    | "rad" => unit_deg(_value * 57.29577951)
+    | "rad" => unit_deg(_val * 57.29577951)
     else this
     end
 
   fun val to_radians():Angle =>
     match _unit
-    | "°" => unit_rad(_value / 57.29577951)
+    | "°" => unit_rad(_val / 57.29577951)
     | "rad" => this
     else this
     end

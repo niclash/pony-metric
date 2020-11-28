@@ -14,23 +14,23 @@
 */
 
 class val Temperature is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
   
   new val unit_C(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "°C"
 
   new val unit_K(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "K"
 
   new val unit_F(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "°F"
 
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "°C" => None
     | "K" => None
@@ -39,34 +39,34 @@ class val Temperature is Metric
     end
     
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit(): String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
   fun val to_C():Temperature =>
     match _unit
     | "°C" => this
-    | "°F" => unit_C((_value - 32) / 1.8)
-    | "K" => unit_C(_value + 273.15)
+    | "°F" => unit_C((_val - 32) / 1.8)
+    | "K" => unit_C(_val + 273.15)
     else this
     end
 
   fun val to_F():Temperature =>
     match _unit
-    | "°C" => unit_F((_value * 1.8) + 32)
+    | "°C" => unit_F((_val * 1.8) + 32)
     | "°F" => this
-    | "K" => unit_F((_value * 1.8) + 305.15)
+    | "K" => unit_F((_val * 1.8) + 305.15)
     else this
     end
 
   fun val to_K():Temperature =>
     match _unit
-    | "°C" => unit_K(_value - 273.15)
-    | "°F" => unit_K(((_value - 32) / 1.8) - 273.15)
+    | "°C" => unit_K(_val - 273.15)
+    | "°F" => unit_K(((_val - 32) / 1.8) - 273.15)
     | "K" => this
     else this
     end

@@ -14,19 +14,19 @@
 */
 
 class val Ratio is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
   
   new val unit_percent(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "%"
 
   new val unit_fraction(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = ""
 
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "%" => None
     | "" => None
@@ -34,24 +34,24 @@ class val Ratio is Metric
     end
     
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit(): String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
   fun val to_percent():Ratio =>
     match _unit
     | "%" => this
-    | "" => unit_percent(_value * 100)
+    | "" => unit_percent(_val * 100)
     else this
     end
 
   fun val to_fraction():Ratio =>
     match _unit
-    | "%" => unit_fraction(_value / 100)
+    | "%" => unit_fraction(_val / 100)
     | "" => this
     else this
     end

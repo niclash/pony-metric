@@ -14,19 +14,19 @@
 */
 
 class val Velocity is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
   
   new val unit_m_s(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "m/s"
     
   new val unit_km_h(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "km/h"
     
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "m/s" => None
     | "km/h" => None
@@ -34,24 +34,24 @@ class val Velocity is Metric
     end
     
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit(): String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
   fun val to_m_s():Velocity =>
     match _unit
     | "m/s" => this
-    | "km/h" => unit_m_s(_value / 3.6)
+    | "km/h" => unit_m_s(_val / 3.6)
     else this
     end
     
   fun val to_km_h():Velocity =>
     match _unit
-    | "m/s" => unit_km_h(_value * 3.6)
+    | "m/s" => unit_km_h(_val * 3.6)
     | "km/h" => this
     else this
     end

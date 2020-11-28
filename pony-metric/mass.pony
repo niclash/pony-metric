@@ -14,27 +14,27 @@
 */
 
 class val Mass is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
   
   new val unit_ug(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "µg"
 
   new val unit_mg(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "mg"
 
   new val unit_g(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "g"
 
   new val unit_kg(value':F64) =>
-    _value = value'
+    _val = value'
     _unit = "kg"
 
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "µg" => None
     | "mg" => None
@@ -44,46 +44,46 @@ class val Mass is Metric
     end
     
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit(): String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
   fun val to_kg():Mass =>
     match _unit
-    | "µg" => unit_kg(_value / 1000000000)
-    | "mg" => unit_kg(_value / 1000000)
-    | "g" => unit_kg(_value / 1000)
+    | "µg" => unit_kg(_val / 1000000000)
+    | "mg" => unit_kg(_val / 1000000)
+    | "g" => unit_kg(_val / 1000)
     | "kg" => this
     else this
     end
 
   fun val to_g():Mass =>
     match _unit
-    | "µg" => unit_g(_value / 1000000)
-    | "mg" => unit_g(_value / 1000)
+    | "µg" => unit_g(_val / 1000000)
+    | "mg" => unit_g(_val / 1000)
     | "g" => this
-    | "kg" => unit_g(_value * 1000)
+    | "kg" => unit_g(_val * 1000)
     else this
     end
 
   fun val to_mg():Mass =>
     match _unit
-    | "µg" => unit_mg(_value / 1000)
+    | "µg" => unit_mg(_val / 1000)
     | "mg" => this
-    | "g" => unit_mg(_value * 1000)
-    | "kg" => unit_mg(_value * 1000000)
+    | "g" => unit_mg(_val * 1000)
+    | "kg" => unit_mg(_val * 1000000)
     else this
     end
 
   fun val to_ug():Mass =>
     match _unit
     | "µg" => this
-    | "mg" => unit_ug(_value * 1000)
-    | "g" => unit_ug(_value * 1000000)
-    | "kg" => unit_ug(_value * 1000000000)
+    | "mg" => unit_ug(_val * 1000)
+    | "g" => unit_ug(_val * 1000000)
+    | "kg" => unit_ug(_val * 1000000000)
     else this
     end

@@ -14,81 +14,81 @@
 */
 
 class val Power is Metric
-  let _value:F64
+  let _val:F64
   let _unit:String
 
   new val unit_nW(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "W"
   
   new val unit_uW(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "µW"
 
 // TODO: Complain abou the pony compiler until it becomes case sensitive    
 //   new val unit_mW(value':F64) =>
   new val unit_milli_watt(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "mW"
   
   new val unit_W(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "W"
   
   new val unit_kW(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "kW"
   
   new val unit_MW(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "MW"
   
   new val unit_GW(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "GW"
   
   new val unit_TW(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "TW"
   
   new val unit_kWh_y(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "kWh/y"
     
   new val unit_MWh_y(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "MWh/y"
 
   new val unit_GWh_y(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "GWh/y"
   
   new val unit_TWh_y(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "TWh/y"
   
   new val unit_J_s(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "J/s"
   
   new val unit_kJ_s(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "kJ/s"
   
   new val unit_MJ_s(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "MJ/s"
   
   new val unit_GJ_s(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "GJ/s"
   
   new val unit_Nm_s(value':F64) =>
-    _value=value'
+    _val=value'
     _unit = "Nm/s"
   
   new val parse(text:String)? =>
-    (_value, _unit) = MetricParser._extract(text)
+    (_val, _unit) = MetricParser._extract(text)
     match _unit
     | "Nm/s" => None
     | "J/s" => None
@@ -111,56 +111,56 @@ class val Power is Metric
     end
   
   fun val value():F64 =>
-    _value
+    _val
     
   fun val unit(): String =>
     _unit
     
   fun box string(): String iso^ =>
-    (_value.string() + " " + _unit).string()
+    (_val.string() + " " + _unit).string()
 
   fun val to_nW() =>
     match _unit
-    | "Nm/s" => unit_nW(_value * 1E9)
-    | "J/s" => unit_nW(_value * 1E9)
-    | "kJ/s" => unit_nW(_value * 1E12)
-    | "MJ/s" => unit_nW(_value * 1E15)
-    | "GJ/s" => unit_nW(_value * 1E18)
+    | "Nm/s" => unit_nW(_val * 1E9)
+    | "J/s" => unit_nW(_val * 1E9)
+    | "kJ/s" => unit_nW(_val * 1E12)
+    | "MJ/s" => unit_nW(_val * 1E15)
+    | "GJ/s" => unit_nW(_val * 1E18)
     | "nW" => this
-    | "µW" => unit_nW(_value * 1E3)
-    | "mW" => unit_nW(_value * 1E6)
-    | "W" => unit_nW(_value * 1E9)
-    | "kW" => unit_nW(_value * 1E12)
-    | "MW" => unit_nW(_value * 1E15)
-    | "GW" => unit_nW(_value * 1E18)
-    | "TW" => unit_nW(_value * 1E21)
-    | "kWh/y" => unit_nW(_value / 8.76E-9)
-    | "MWh/y" => unit_nW(_value / 8.76E-12)
-    | "GWh/y" => unit_nW(_value / 8.76E-15)
-    | "TWh/y" => unit_nW(_value / 8.76E-18)
+    | "µW" => unit_nW(_val * 1E3)
+    | "mW" => unit_nW(_val * 1E6)
+    | "W" => unit_nW(_val * 1E9)
+    | "kW" => unit_nW(_val * 1E12)
+    | "MW" => unit_nW(_val * 1E15)
+    | "GW" => unit_nW(_val * 1E18)
+    | "TW" => unit_nW(_val * 1E21)
+    | "kWh/y" => unit_nW(_val / 8.76E-9)
+    | "MWh/y" => unit_nW(_val / 8.76E-12)
+    | "GWh/y" => unit_nW(_val / 8.76E-15)
+    | "TWh/y" => unit_nW(_val / 8.76E-18)
     else this
     end
 
   
   fun val to_uW() =>
     match _unit
-    | "Nm/s" => unit_uW(_value * 1E6)
-    | "J/s" => unit_uW(_value * 1E6)
-    | "kJ/s" => unit_uW(_value * 1E9)
-    | "MJ/s" => unit_uW(_value * 1E12)
-    | "GJ/s" => unit_uW(_value * 1E15)
-    | "nW" => unit_uW(_value / 1000)
+    | "Nm/s" => unit_uW(_val * 1E6)
+    | "J/s" => unit_uW(_val * 1E6)
+    | "kJ/s" => unit_uW(_val * 1E9)
+    | "MJ/s" => unit_uW(_val * 1E12)
+    | "GJ/s" => unit_uW(_val * 1E15)
+    | "nW" => unit_uW(_val / 1000)
     | "µW" => this
-    | "mW" => unit_uW(_value * 1E3)
-    | "W" => unit_uW(_value * 1E6)
-    | "kW" => unit_uW(_value * 1E9)
-    | "MW" => unit_uW(_value * 1E12)
-    | "GW" => unit_uW(_value * 1E15)
-    | "TW" => unit_uW(_value * 1E18)
-    | "kWh/y" => unit_uW(_value / 8.76E-6)
-    | "MWh/y" => unit_uW(_value / 8.76E-9)
-    | "GWh/y" => unit_uW(_value / 8.76E-12)
-    | "TWh/y" => unit_uW(_value / 8.76E-15)
+    | "mW" => unit_uW(_val * 1E3)
+    | "W" => unit_uW(_val * 1E6)
+    | "kW" => unit_uW(_val * 1E9)
+    | "MW" => unit_uW(_val * 1E12)
+    | "GW" => unit_uW(_val * 1E15)
+    | "TW" => unit_uW(_val * 1E18)
+    | "kWh/y" => unit_uW(_val / 8.76E-6)
+    | "MWh/y" => unit_uW(_val / 8.76E-9)
+    | "GWh/y" => unit_uW(_val / 8.76E-12)
+    | "TWh/y" => unit_uW(_val / 8.76E-15)
     else this
     end
 
@@ -168,310 +168,310 @@ class val Power is Metric
 //   fun val to_mW() =>
   fun val to_milli_watt() =>
     match _unit
-    | "Nm/s" => unit_milli_watt(_value * 1E3)
-    | "J/s" => unit_milli_watt(_value * 1E3)
-    | "kJ/s" => unit_milli_watt(_value * 1E6)
-    | "MJ/s" => unit_milli_watt(_value * 1E9)
-    | "GJ/s" => unit_milli_watt(_value * 1E12)
-    | "nW" => unit_milli_watt(_value / 1E6)
-    | "µW" => unit_milli_watt(_value / 1E3)
+    | "Nm/s" => unit_milli_watt(_val * 1E3)
+    | "J/s" => unit_milli_watt(_val * 1E3)
+    | "kJ/s" => unit_milli_watt(_val * 1E6)
+    | "MJ/s" => unit_milli_watt(_val * 1E9)
+    | "GJ/s" => unit_milli_watt(_val * 1E12)
+    | "nW" => unit_milli_watt(_val / 1E6)
+    | "µW" => unit_milli_watt(_val / 1E3)
     | "mW" => this
-    | "W" => unit_milli_watt(_value * 1E3)
-    | "kW" => unit_milli_watt(_value * 1E6)
-    | "MW" => unit_milli_watt(_value * 1E9)
-    | "GW" => unit_milli_watt(_value * 1E12)
-    | "TW" => unit_milli_watt(_value * 1E15)
-    | "kWh/y" => unit_milli_watt(_value / 8.76E-3)
-    | "MWh/y" => unit_milli_watt(_value / 8.76E-6)
-    | "GWh/y" => unit_milli_watt(_value / 8.76E-9)
-    | "TWh/y" => unit_milli_watt(_value / 8.76E-12)
+    | "W" => unit_milli_watt(_val * 1E3)
+    | "kW" => unit_milli_watt(_val * 1E6)
+    | "MW" => unit_milli_watt(_val * 1E9)
+    | "GW" => unit_milli_watt(_val * 1E12)
+    | "TW" => unit_milli_watt(_val * 1E15)
+    | "kWh/y" => unit_milli_watt(_val / 8.76E-3)
+    | "MWh/y" => unit_milli_watt(_val / 8.76E-6)
+    | "GWh/y" => unit_milli_watt(_val / 8.76E-9)
+    | "TWh/y" => unit_milli_watt(_val / 8.76E-12)
     else this
     end
   
   fun val to_W() =>
     match _unit
-    | "Nm/s" => unit_W(_value)
-    | "J/s" => unit_W(_value)
-    | "kJ/s" => unit_W(_value * 1E3)
-    | "MJ/s" => unit_W(_value * 1E6)
-    | "GJ/s" => unit_W(_value * 1E9)
-    | "nW" => unit_W(_value / 1E9)
-    | "µW" => unit_W(_value / 1E6)
-    | "mW" => unit_W(_value / 1E3)
+    | "Nm/s" => unit_W(_val)
+    | "J/s" => unit_W(_val)
+    | "kJ/s" => unit_W(_val * 1E3)
+    | "MJ/s" => unit_W(_val * 1E6)
+    | "GJ/s" => unit_W(_val * 1E9)
+    | "nW" => unit_W(_val / 1E9)
+    | "µW" => unit_W(_val / 1E6)
+    | "mW" => unit_W(_val / 1E3)
     | "W" => this
-    | "kW" => unit_W(_value * 1E3)
-    | "MW" => unit_W(_value * 1E6)
-    | "GW" => unit_W(_value * 1E9)
-    | "TW" => unit_W(_value * 1E12)
-    | "kWh/y" => unit_W(_value / 8.76)
-    | "MWh/y" => unit_W(_value / 8.76E-3)
-    | "GWh/y" => unit_W(_value / 8.76E-6)
-    | "TWh/y" => unit_W(_value / 8.76E-9)
+    | "kW" => unit_W(_val * 1E3)
+    | "MW" => unit_W(_val * 1E6)
+    | "GW" => unit_W(_val * 1E9)
+    | "TW" => unit_W(_val * 1E12)
+    | "kWh/y" => unit_W(_val / 8.76)
+    | "MWh/y" => unit_W(_val / 8.76E-3)
+    | "GWh/y" => unit_W(_val / 8.76E-6)
+    | "TWh/y" => unit_W(_val / 8.76E-9)
     else this
     end
   
   fun val to_kW() =>
     match _unit
-    | "Nm/s" => unit_kW(_value / 1E3)
-    | "J/s" => unit_kW(_value / 1E3)
-    | "kJ/s" => unit_kW(_value)
-    | "MJ/s" => unit_kW(_value * 1E3)
-    | "GJ/s" => unit_kW(_value * 1E6)
-    | "nW" => unit_kW(_value / 1E12)
-    | "µW" => unit_kW(_value / 1E9)
-    | "mW" => unit_kW(_value / 1E6)
-    | "W" => unit_kW(_value / 1E3)
+    | "Nm/s" => unit_kW(_val / 1E3)
+    | "J/s" => unit_kW(_val / 1E3)
+    | "kJ/s" => unit_kW(_val)
+    | "MJ/s" => unit_kW(_val * 1E3)
+    | "GJ/s" => unit_kW(_val * 1E6)
+    | "nW" => unit_kW(_val / 1E12)
+    | "µW" => unit_kW(_val / 1E9)
+    | "mW" => unit_kW(_val / 1E6)
+    | "W" => unit_kW(_val / 1E3)
     | "kW" => this
-    | "MW" => unit_kW(_value * 1E3)
-    | "GW" => unit_kW(_value * 1E6)
-    | "TW" => unit_kW(_value * 1E9)
-    | "kWh/y" => unit_kW(_value / 8.76E3)
-    | "MWh/y" => unit_kW(_value / 8.76)
-    | "GWh/y" => unit_kW(_value / 8.76E-3)
-    | "TWh/y" => unit_kW(_value / 8.76E-6)
+    | "MW" => unit_kW(_val * 1E3)
+    | "GW" => unit_kW(_val * 1E6)
+    | "TW" => unit_kW(_val * 1E9)
+    | "kWh/y" => unit_kW(_val / 8.76E3)
+    | "MWh/y" => unit_kW(_val / 8.76)
+    | "GWh/y" => unit_kW(_val / 8.76E-3)
+    | "TWh/y" => unit_kW(_val / 8.76E-6)
     else this
     end
   
   fun val to_MW() =>
     match _unit
-    | "Nm/s" => unit_MW(_value / 1E6)
-    | "J/s" => unit_MW(_value / 1E6)
-    | "kJ/s" => unit_MW(_value / 1E3)
-    | "MJ/s" => unit_MW(_value)
-    | "GJ/s" => unit_MW(_value * 1E3)
-    | "nW" => unit_MW(_value / 1E15)
-    | "µW" => unit_MW(_value / 1E12)
-    | "mW" => unit_MW(_value / 1E9)
-    | "W" => unit_MW(_value / 1E6)
-    | "kW" => unit_MW(_value / 1E3)
+    | "Nm/s" => unit_MW(_val / 1E6)
+    | "J/s" => unit_MW(_val / 1E6)
+    | "kJ/s" => unit_MW(_val / 1E3)
+    | "MJ/s" => unit_MW(_val)
+    | "GJ/s" => unit_MW(_val * 1E3)
+    | "nW" => unit_MW(_val / 1E15)
+    | "µW" => unit_MW(_val / 1E12)
+    | "mW" => unit_MW(_val / 1E9)
+    | "W" => unit_MW(_val / 1E6)
+    | "kW" => unit_MW(_val / 1E3)
     | "MW" => this
-    | "GW" => unit_MW(_value * 1E3)
-    | "TW" => unit_MW(_value * 1E6)
-    | "kWh/y" => unit_MW(_value / 8.76E6)
-    | "MWh/y" => unit_MW(_value / 8.76E3)
-    | "GWh/y" => unit_MW(_value / 8.76)
-    | "TWh/y" => unit_MW(_value / 8.76E-3)
+    | "GW" => unit_MW(_val * 1E3)
+    | "TW" => unit_MW(_val * 1E6)
+    | "kWh/y" => unit_MW(_val / 8.76E6)
+    | "MWh/y" => unit_MW(_val / 8.76E3)
+    | "GWh/y" => unit_MW(_val / 8.76)
+    | "TWh/y" => unit_MW(_val / 8.76E-3)
     else this
     end
   
   fun val to_GW() =>
     match _unit
-    | "Nm/s" => unit_GW(_value / 1E9)
-    | "J/s" => unit_GW(_value / 1E9)
-    | "kJ/s" => unit_GW(_value / 1E6)
-    | "MJ/s" => unit_GW(_value / 1E3)
-    | "GJ/s" => unit_GW(_value)
-    | "nW" => unit_GW(_value / 1E18)
-    | "µW" => unit_GW(_value / 1E15)
-    | "mW" => unit_GW(_value / 1E12)
-    | "W" => unit_GW(_value / 1E9)
-    | "kW" => unit_GW(_value / 1E6)
-    | "MW" => unit_GW(_value / 1E3)
+    | "Nm/s" => unit_GW(_val / 1E9)
+    | "J/s" => unit_GW(_val / 1E9)
+    | "kJ/s" => unit_GW(_val / 1E6)
+    | "MJ/s" => unit_GW(_val / 1E3)
+    | "GJ/s" => unit_GW(_val)
+    | "nW" => unit_GW(_val / 1E18)
+    | "µW" => unit_GW(_val / 1E15)
+    | "mW" => unit_GW(_val / 1E12)
+    | "W" => unit_GW(_val / 1E9)
+    | "kW" => unit_GW(_val / 1E6)
+    | "MW" => unit_GW(_val / 1E3)
     | "GW" => this
-    | "TW" => unit_GW(_value * 1E3)
-    | "kWh/y" => unit_GW(_value / 8.76E9)
-    | "MWh/y" => unit_GW(_value / 8.76E6)
-    | "GWh/y" => unit_GW(_value / 8.76E3)
-    | "TWh/y" => unit_GW(_value / 8.76)
+    | "TW" => unit_GW(_val * 1E3)
+    | "kWh/y" => unit_GW(_val / 8.76E9)
+    | "MWh/y" => unit_GW(_val / 8.76E6)
+    | "GWh/y" => unit_GW(_val / 8.76E3)
+    | "TWh/y" => unit_GW(_val / 8.76)
     else this
     end
   
   fun val to_TW() =>
     match _unit
-    | "Nm/s" => unit_TW(_value / 1E12)
-    | "J/s" => unit_TW(_value / 1E12)
-    | "kJ/s" => unit_TW(_value / 1E9)
-    | "MJ/s" => unit_TW(_value / 1E6)
-    | "GJ/s" => unit_TW(_value / 1E3)
-    | "nW" => unit_TW(_value / 1E21)
-    | "µW" => unit_TW(_value / 1E18)
-    | "mW" => unit_TW(_value / 1E15)
-    | "W" => unit_TW(_value / 1E12)
-    | "kW" => unit_TW(_value / 1E9)
-    | "MW" => unit_TW(_value / 1E6)
-    | "GW" => unit_TW(_value / 1E6)
+    | "Nm/s" => unit_TW(_val / 1E12)
+    | "J/s" => unit_TW(_val / 1E12)
+    | "kJ/s" => unit_TW(_val / 1E9)
+    | "MJ/s" => unit_TW(_val / 1E6)
+    | "GJ/s" => unit_TW(_val / 1E3)
+    | "nW" => unit_TW(_val / 1E21)
+    | "µW" => unit_TW(_val / 1E18)
+    | "mW" => unit_TW(_val / 1E15)
+    | "W" => unit_TW(_val / 1E12)
+    | "kW" => unit_TW(_val / 1E9)
+    | "MW" => unit_TW(_val / 1E6)
+    | "GW" => unit_TW(_val / 1E6)
     | "TW" => this
-    | "kWh/y" => unit_TW(_value / 8.76E12)
-    | "MWh/y" => unit_TW(_value / 8.76E9)
-    | "GWh/y" => unit_TW(_value / 8.76E6)
-    | "TWh/y" => unit_TW(_value / 8.76E3)
+    | "kWh/y" => unit_TW(_val / 8.76E12)
+    | "MWh/y" => unit_TW(_val / 8.76E9)
+    | "GWh/y" => unit_TW(_val / 8.76E6)
+    | "TWh/y" => unit_TW(_val / 8.76E3)
     else this
     end
   
   fun val to_kWh_y() =>
     match _unit
-    | "Nm/s" => unit_kWh_y(_value * 8.76)
-    | "J/s" => unit_kWh_y(_value * 8.76)
-    | "kJ/s" => unit_kWh_y(_value * 8.76E3)
-    | "MJ/s" => unit_kWh_y(_value * 8.76E6 )
-    | "GJ/s" => unit_kWh_y(_value * 8.76E9)
-    | "nW" => unit_kWh_y(_value * 8.76E-9)
-    | "µW" => unit_kWh_y(_value * 8.76E-6)
-    | "mW" => unit_kWh_y(_value * 8.76E-3)
-    | "W" => unit_kWh_y(_value * 8.76)
-    | "kW" => unit_kWh_y(_value * 8.76E3)
-    | "MW" => unit_kWh_y(_value * 8.76E6)
-    | "GW" => unit_kWh_y(_value * 8.76E9)
-    | "TW" => unit_kWh_y(_value * 8.76E12)
+    | "Nm/s" => unit_kWh_y(_val * 8.76)
+    | "J/s" => unit_kWh_y(_val * 8.76)
+    | "kJ/s" => unit_kWh_y(_val * 8.76E3)
+    | "MJ/s" => unit_kWh_y(_val * 8.76E6 )
+    | "GJ/s" => unit_kWh_y(_val * 8.76E9)
+    | "nW" => unit_kWh_y(_val * 8.76E-9)
+    | "µW" => unit_kWh_y(_val * 8.76E-6)
+    | "mW" => unit_kWh_y(_val * 8.76E-3)
+    | "W" => unit_kWh_y(_val * 8.76)
+    | "kW" => unit_kWh_y(_val * 8.76E3)
+    | "MW" => unit_kWh_y(_val * 8.76E6)
+    | "GW" => unit_kWh_y(_val * 8.76E9)
+    | "TW" => unit_kWh_y(_val * 8.76E12)
     | "kWh/y" => this
-    | "MWh/y" => unit_kWh_y(_value * 1E3)
-    | "GWh/y" => unit_kWh_y(_value * 1E6)
-    | "TWh/y" => unit_kWh_y(_value * 1E9)
+    | "MWh/y" => unit_kWh_y(_val * 1E3)
+    | "GWh/y" => unit_kWh_y(_val * 1E6)
+    | "TWh/y" => unit_kWh_y(_val * 1E9)
     else this
     end
     
   fun val to_MWh_y() =>
     match _unit
-    | "Nm/s" => unit_MWh_y(_value * 8.76E-3)
-    | "J/s" => unit_MWh_y(_value * 8.76E-3)
-    | "kJ/s" => unit_MWh_y(_value * 8.76)
-    | "MJ/s" => unit_MWh_y(_value * 8.76E3 )
-    | "GJ/s" => unit_MWh_y(_value * 8.76E6)
-    | "nW" => unit_MWh_y(_value * 8.76E-12)
-    | "µW" => unit_MWh_y(_value * 8.76E-9)
-    | "mW" => unit_MWh_y(_value * 8.76E-6)
-    | "W" => unit_MWh_y(_value * 8.76E-3)
-    | "kW" => unit_MWh_y(_value * 8.76)
-    | "MW" => unit_MWh_y(_value * 8.76E3)
-    | "GW" => unit_MWh_y(_value * 8.76E6)
-    | "TW" => unit_MWh_y(_value * 8.76E9)
-    | "kWh/y" => unit_MWh_y(_value * 1E-3)
+    | "Nm/s" => unit_MWh_y(_val * 8.76E-3)
+    | "J/s" => unit_MWh_y(_val * 8.76E-3)
+    | "kJ/s" => unit_MWh_y(_val * 8.76)
+    | "MJ/s" => unit_MWh_y(_val * 8.76E3 )
+    | "GJ/s" => unit_MWh_y(_val * 8.76E6)
+    | "nW" => unit_MWh_y(_val * 8.76E-12)
+    | "µW" => unit_MWh_y(_val * 8.76E-9)
+    | "mW" => unit_MWh_y(_val * 8.76E-6)
+    | "W" => unit_MWh_y(_val * 8.76E-3)
+    | "kW" => unit_MWh_y(_val * 8.76)
+    | "MW" => unit_MWh_y(_val * 8.76E3)
+    | "GW" => unit_MWh_y(_val * 8.76E6)
+    | "TW" => unit_MWh_y(_val * 8.76E9)
+    | "kWh/y" => unit_MWh_y(_val * 1E-3)
     | "MWh/y" => this
-    | "GWh/y" => unit_MWh_y(_value * 1E3)
-    | "TWh/y" => unit_MWh_y(_value * 1E6)
+    | "GWh/y" => unit_MWh_y(_val * 1E3)
+    | "TWh/y" => unit_MWh_y(_val * 1E6)
     else this
     end
     
 
   fun val to_GWh_y() =>
     match _unit
-    | "Nm/s" => unit_GWh_y(_value * 8.76E-6)
-    | "J/s" => unit_GWh_y(_value * 8.76E-6)
-    | "kJ/s" => unit_GWh_y(_value * 8.76E-3)
-    | "MJ/s" => unit_GWh_y(_value * 8.76 )
-    | "GJ/s" => unit_GWh_y(_value * 8.76E3)
-    | "nW" => unit_GWh_y(_value * 8.76E-15)
-    | "µW" => unit_GWh_y(_value * 8.76E-12)
-    | "mW" => unit_GWh_y(_value * 8.76E-9)
-    | "W" => unit_GWh_y(_value * 8.76E-6)
-    | "kW" => unit_GWh_y(_value * 8.76E-3)
-    | "MW" => unit_GWh_y(_value * 8.76)
-    | "GW" => unit_GWh_y(_value * 8.76E3)
-    | "TW" => unit_GWh_y(_value * 8.76E6)
-    | "kWh/y" => unit_GWh_y(_value * 1E-6)
-    | "MWh/y" => unit_GWh_y(_value * 1E-3)
+    | "Nm/s" => unit_GWh_y(_val * 8.76E-6)
+    | "J/s" => unit_GWh_y(_val * 8.76E-6)
+    | "kJ/s" => unit_GWh_y(_val * 8.76E-3)
+    | "MJ/s" => unit_GWh_y(_val * 8.76 )
+    | "GJ/s" => unit_GWh_y(_val * 8.76E3)
+    | "nW" => unit_GWh_y(_val * 8.76E-15)
+    | "µW" => unit_GWh_y(_val * 8.76E-12)
+    | "mW" => unit_GWh_y(_val * 8.76E-9)
+    | "W" => unit_GWh_y(_val * 8.76E-6)
+    | "kW" => unit_GWh_y(_val * 8.76E-3)
+    | "MW" => unit_GWh_y(_val * 8.76)
+    | "GW" => unit_GWh_y(_val * 8.76E3)
+    | "TW" => unit_GWh_y(_val * 8.76E6)
+    | "kWh/y" => unit_GWh_y(_val * 1E-6)
+    | "MWh/y" => unit_GWh_y(_val * 1E-3)
     | "GWh/y" => this
-    | "TWh/y" => unit_GWh_y(_value * 1E3)
+    | "TWh/y" => unit_GWh_y(_val * 1E3)
     else this
     end
   
   fun val to_J_s() =>
     match _unit
-    | "Nm/s" => unit_J_s(_value)
+    | "Nm/s" => unit_J_s(_val)
     | "J/s" => this
-    | "kJ/s" => unit_J_s(_value * 1E3)
-    | "MJ/s" => unit_J_s(_value * 1E6)
-    | "GJ/s" => unit_J_s(_value * 1E9)
-    | "nW" => unit_J_s(_value / 1E9)
-    | "µW" => unit_J_s(_value / 1E6)
-    | "mW" => unit_J_s(_value / 1E3)
-    | "W" => unit_J_s(_value)
-    | "kW" => unit_J_s(_value * 1E3)
-    | "MW" => unit_J_s(_value * 1E6)
-    | "GW" => unit_J_s(_value * 1E9)
-    | "TW" => unit_J_s(_value * 1E12)
-    | "kWh/y" => unit_J_s(_value / 8.76)
-    | "MWh/y" => unit_J_s(_value / 8.76E-3)
-    | "GWh/y" => unit_J_s(_value / 8.76E-6)
-    | "TWh/y" => unit_J_s(_value / 8.76E-9)
+    | "kJ/s" => unit_J_s(_val * 1E3)
+    | "MJ/s" => unit_J_s(_val * 1E6)
+    | "GJ/s" => unit_J_s(_val * 1E9)
+    | "nW" => unit_J_s(_val / 1E9)
+    | "µW" => unit_J_s(_val / 1E6)
+    | "mW" => unit_J_s(_val / 1E3)
+    | "W" => unit_J_s(_val)
+    | "kW" => unit_J_s(_val * 1E3)
+    | "MW" => unit_J_s(_val * 1E6)
+    | "GW" => unit_J_s(_val * 1E9)
+    | "TW" => unit_J_s(_val * 1E12)
+    | "kWh/y" => unit_J_s(_val / 8.76)
+    | "MWh/y" => unit_J_s(_val / 8.76E-3)
+    | "GWh/y" => unit_J_s(_val / 8.76E-6)
+    | "TWh/y" => unit_J_s(_val / 8.76E-9)
     else this
     end
   
   fun val to_kJ_s() =>
     match _unit
-    | "Nm/s" => unit_kJ_s(_value * 1E3)
-    | "J/s" => unit_kJ_s(_value * 1E3)
+    | "Nm/s" => unit_kJ_s(_val * 1E3)
+    | "J/s" => unit_kJ_s(_val * 1E3)
     | "kJ/s" => this
-    | "MJ/s" => unit_kJ_s(_value * 1E3)
-    | "GJ/s" => unit_kJ_s(_value * 1E6)
-    | "nW" => unit_kJ_s(_value / 1E12)
-    | "µW" => unit_kJ_s(_value / 1E9)
-    | "mW" => unit_kJ_s(_value / 1E6)
-    | "W" => unit_kJ_s(_value / 1E3)
-    | "kW" => unit_kJ_s(_value)
-    | "MW" => unit_kJ_s(_value * 1E3)
-    | "GW" => unit_kJ_s(_value * 1E6)
-    | "TW" => unit_kJ_s(_value * 1E9)
-    | "kWh/y" => unit_kJ_s(_value / 8.76E3)
-    | "MWh/y" => unit_kJ_s(_value / 8.76)
-    | "GWh/y" => unit_kJ_s(_value / 8.76E-3)
-    | "TWh/y" => unit_kJ_s(_value / 8.76E-6)
+    | "MJ/s" => unit_kJ_s(_val * 1E3)
+    | "GJ/s" => unit_kJ_s(_val * 1E6)
+    | "nW" => unit_kJ_s(_val / 1E12)
+    | "µW" => unit_kJ_s(_val / 1E9)
+    | "mW" => unit_kJ_s(_val / 1E6)
+    | "W" => unit_kJ_s(_val / 1E3)
+    | "kW" => unit_kJ_s(_val)
+    | "MW" => unit_kJ_s(_val * 1E3)
+    | "GW" => unit_kJ_s(_val * 1E6)
+    | "TW" => unit_kJ_s(_val * 1E9)
+    | "kWh/y" => unit_kJ_s(_val / 8.76E3)
+    | "MWh/y" => unit_kJ_s(_val / 8.76)
+    | "GWh/y" => unit_kJ_s(_val / 8.76E-3)
+    | "TWh/y" => unit_kJ_s(_val / 8.76E-6)
     else this
     end
   
   fun val to_MJ_s() =>
     match _unit
-    | "Nm/s" => unit_MJ_s(_value / 1E6)
-    | "J/s" => unit_MJ_s(_value / 1E6)
-    | "kJ/s" => unit_MJ_s(_value / 1E3)
+    | "Nm/s" => unit_MJ_s(_val / 1E6)
+    | "J/s" => unit_MJ_s(_val / 1E6)
+    | "kJ/s" => unit_MJ_s(_val / 1E3)
     | "MJ/s" => this
-    | "GJ/s" => unit_MJ_s(_value * 1E3)
-    | "nW" => unit_MJ_s(_value / 1E15)
-    | "µW" => unit_MJ_s(_value / 1E12)
-    | "mW" => unit_MJ_s(_value / 1E9)
-    | "W" => unit_MJ_s(_value / 1E6)
-    | "kW" => unit_MJ_s(_value / 1E3)
-    | "MW" => unit_MJ_s(_value)
-    | "GW" => unit_MJ_s(_value * 1E3)
-    | "TW" => unit_MJ_s(_value * 1E6)
-    | "kWh/y" => unit_kJ_s(_value / 8.76E6)
-    | "MWh/y" => unit_kJ_s(_value / 8.76E3)
-    | "GWh/y" => unit_kJ_s(_value / 8.76)
-    | "TWh/y" => unit_kJ_s(_value / 8.76E-3)
+    | "GJ/s" => unit_MJ_s(_val * 1E3)
+    | "nW" => unit_MJ_s(_val / 1E15)
+    | "µW" => unit_MJ_s(_val / 1E12)
+    | "mW" => unit_MJ_s(_val / 1E9)
+    | "W" => unit_MJ_s(_val / 1E6)
+    | "kW" => unit_MJ_s(_val / 1E3)
+    | "MW" => unit_MJ_s(_val)
+    | "GW" => unit_MJ_s(_val * 1E3)
+    | "TW" => unit_MJ_s(_val * 1E6)
+    | "kWh/y" => unit_kJ_s(_val / 8.76E6)
+    | "MWh/y" => unit_kJ_s(_val / 8.76E3)
+    | "GWh/y" => unit_kJ_s(_val / 8.76)
+    | "TWh/y" => unit_kJ_s(_val / 8.76E-3)
     else this
     end
   
   fun val to_GJ_s() =>
     match _unit
-    | "Nm/s" => unit_GJ_s(_value / 1E9)
-    | "J/s" => unit_GJ_s(_value / 1E9)
-    | "kJ/s" => unit_GJ_s(_value / 1E6)
-    | "MJ/s" => unit_GJ_s(_value / 1E3)
+    | "Nm/s" => unit_GJ_s(_val / 1E9)
+    | "J/s" => unit_GJ_s(_val / 1E9)
+    | "kJ/s" => unit_GJ_s(_val / 1E6)
+    | "MJ/s" => unit_GJ_s(_val / 1E3)
     | "GJ/s" => this
-    | "nW" => unit_GJ_s(_value / 1E18)
-    | "µW" => unit_GJ_s(_value / 1E15)
-    | "mW" => unit_GJ_s(_value / 1E12)
-    | "W" => unit_GJ_s(_value / 1E9)
-    | "kW" => unit_GJ_s(_value / 1E6)
-    | "MW" => unit_GJ_s(_value / 1E3)
-    | "GW" => unit_GJ_s(_value)
-    | "TW" => unit_GJ_s(_value * 1E3)
-    | "kWh/y" => unit_kJ_s(_value / 8.76E9)
-    | "MWh/y" => unit_kJ_s(_value / 8.76E6)
-    | "GWh/y" => unit_kJ_s(_value / 8.76E3)
-    | "TWh/y" => unit_kJ_s(_value / 8.76)
+    | "nW" => unit_GJ_s(_val / 1E18)
+    | "µW" => unit_GJ_s(_val / 1E15)
+    | "mW" => unit_GJ_s(_val / 1E12)
+    | "W" => unit_GJ_s(_val / 1E9)
+    | "kW" => unit_GJ_s(_val / 1E6)
+    | "MW" => unit_GJ_s(_val / 1E3)
+    | "GW" => unit_GJ_s(_val)
+    | "TW" => unit_GJ_s(_val * 1E3)
+    | "kWh/y" => unit_kJ_s(_val / 8.76E9)
+    | "MWh/y" => unit_kJ_s(_val / 8.76E6)
+    | "GWh/y" => unit_kJ_s(_val / 8.76E3)
+    | "TWh/y" => unit_kJ_s(_val / 8.76)
     else this
     end
   
   fun val to_Nm_s() =>
     match _unit
     | "Nm/s" => this
-    | "J/s" => unit_W(_value)
-    | "kJ/s" => unit_W(_value * 1E3)
-    | "MJ/s" => unit_W(_value * 1E6)
-    | "GJ/s" => unit_W(_value * 1E9)
-    | "nW" => unit_W(_value / 1E9)
-    | "µW" => unit_W(_value / 1E6)
-    | "mW" => unit_W(_value / 1E3)
-    | "W" => unit_W(_value)
-    | "kW" => unit_W(_value * 1E3)
-    | "MW" => unit_W(_value * 1E6)
-    | "GW" => unit_W(_value * 1E9)
-    | "TW" => unit_W(_value * 1E12)
-    | "kWh/y" => unit_J_s(_value / 8.76)
-    | "MWh/y" => unit_J_s(_value / 8.76E-3)
-    | "GWh/y" => unit_J_s(_value / 8.76E-6)
-    | "TWh/y" => unit_J_s(_value / 8.76E-9)
+    | "J/s" => unit_W(_val)
+    | "kJ/s" => unit_W(_val * 1E3)
+    | "MJ/s" => unit_W(_val * 1E6)
+    | "GJ/s" => unit_W(_val * 1E9)
+    | "nW" => unit_W(_val / 1E9)
+    | "µW" => unit_W(_val / 1E6)
+    | "mW" => unit_W(_val / 1E3)
+    | "W" => unit_W(_val)
+    | "kW" => unit_W(_val * 1E3)
+    | "MW" => unit_W(_val * 1E6)
+    | "GW" => unit_W(_val * 1E9)
+    | "TW" => unit_W(_val * 1E12)
+    | "kWh/y" => unit_J_s(_val / 8.76)
+    | "MWh/y" => unit_J_s(_val / 8.76E-3)
+    | "GWh/y" => unit_J_s(_val / 8.76E-6)
+    | "TWh/y" => unit_J_s(_val / 8.76E-9)
     else this
     end
   

@@ -1,10 +1,10 @@
 
 
-trait Metric is Stringable
+trait val Metric is Stringable
     new val parse(text:String)?
     fun val value():F64
     fun val unit():String
-    
+
     
 primitive MetricParser
     fun val parse(text:String):Metric val? =>
